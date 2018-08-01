@@ -28,7 +28,7 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <div id="root"></div>
-  <div id="map"></div>
+  <!-- <div id="map"></div> -->
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -39,9 +39,10 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script>
+  <!-- <script>
     var map;
     var markers = [];
+    var locations = [];
 
     // This is a map of Vienna city.
     function initMap() {
@@ -51,7 +52,7 @@
         mapTypeControl: false
       });
 
-      var locations = [
+      locations = [
         { title: "St. Stephen's Cathedral", location: { lat: 48.208414, lng: 16.373471 } },
         { title: "Viennese Giant Ferris Wheel", location: { lat: 48.216626, lng: 16.395889 } },
         { title: "Belvedere Palace", location: { lat: 48.191566, lng: 16.380958 } },
@@ -111,7 +112,7 @@
     }
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7-ShBE4Qv6_BXfem3ew1SeJfAOmTozP0&callback=initMap">
-  </script>
+  </script> -->
 </body>
 
 </html>

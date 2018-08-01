@@ -23,14 +23,13 @@
 }
 
 html,
-body {
+body,
+#root,
+#root *
+{
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-#map {
-  height: 100%;
 }
 
 @keyframes App-logo-spin {
