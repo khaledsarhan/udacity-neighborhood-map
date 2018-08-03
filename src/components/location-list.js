@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
 
-const LocationList = ({ locations, onLocationClick }) => {
+class LocationList extends Component {
 
-    return (
-        <div className="list">
-            <ul>
-                {locations.map(loc => {
-                    <li onClick={onLocationClick}>loc.title</li>
-                })}
-            </ul>
-        </div>
-    )
+    componentDidMount() {
+       // window.addEventListener('load', this.props.onLocationsLoaded(this.props.locations));
+    }
+
+    render() {
+        return (
+            <div className="list">
+                <ul>
+                    {this.props.locations.map((loc, index) => (
+                        <li key={index} onClick={this.props.onLocationClick}>{loc.title}</li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
 }
 
 export default LocationList;
