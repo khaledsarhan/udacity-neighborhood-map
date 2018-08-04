@@ -6,12 +6,12 @@ class Search extends Component {
 
     state = {
         locations: [
-            { title: "St. Stephen's Cathedral", location: { lat: 48.208414, lng: 16.373471 } },
-            { title: "Viennese Giant Ferris Wheel", location: { lat: 48.216626, lng: 16.395889 } },
-            { title: "Belvedere Palace", location: { lat: 48.191566, lng: 16.380958 } },
-            { title: "Schönbrunn Palace", location: { lat: 48.185819, lng: 16.312763 } },
-            { title: "Schönbrunn Zoo", location: { lat: 48.182094, lng: 16.302785 } },
-            { title: "Volksgarten", location: { lat: 48.208120, lng: 16.361455 } }
+            { id: 1, title: "St. Stephen's Cathedral", location: { lat: 48.208414, lng: 16.373471 } },
+            { id: 2, title: "Viennese Giant Ferris Wheel", location: { lat: 48.216626, lng: 16.395889 } },
+            { id: 3, title: "Belvedere Palace", location: { lat: 48.191566, lng: 16.380958 } },
+            { id: 4, title: "Schönbrunn Palace", location: { lat: 48.185819, lng: 16.312763 } },
+            { id: 5, title: "Schönbrunn Zoo", location: { lat: 48.182094, lng: 16.302785 } },
+            { id: 6, title: "Volksgarten", location: { lat: 48.208120, lng: 16.361455 } }
         ],
         searchResult: []
     }
@@ -46,7 +46,7 @@ class Search extends Component {
                         onChange={e => this.searchLocation(e.target.value)} />
                 </div>
                 {this.props.onLocationsLoaded(this.state.searchResult)}
-                <LocationList locations={this.state.searchResult}/>
+                <LocationList locations={this.state.searchResult} onLocationClick={this.props.onLocationClick} />
             </div>
         )
     }

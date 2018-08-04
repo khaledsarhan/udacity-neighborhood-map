@@ -49,7 +49,8 @@ class Map extends Component {
             const marker = new google.maps.Marker({
                 position: location.location,
                 map: this.state.map,
-                title: location.title
+                title: location.title,
+                id: location.id
             })
 
             marker.addListener('click', () => {
@@ -59,29 +60,28 @@ class Map extends Component {
             markers.push(marker);
         })
         this.state.markers = markers;
-       // this.state.map.fitBounds(bounds)
-       console.log(bounds);
+        console.log(markers[0]);
+        // this.state.map.fitBounds(bounds)
+        //console.log(bounds);
+    }
+
+    openMarkerInfo = (location) => {
+        let { infowindow } = this.state
+        const marker = this.state.markers.filter((m) => m.id === location.id)[0];
+        this.populateInfoWindow(marker, infowindow);
     }
 
     populateInfoWindow = (marker, infowindow) => {
-        // const defaultIcon = marker.getIcon()
-        const { highlightedIcon, markers } = this.state
+
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker !== marker) {
-            // reset the color of previous marker
-            if (infowindow.marker) {
-                const ind = markers.findIndex(m => m.title === infowindow.marker.title)
-                //markers[ind].setIcon(defaultIcon)
-            }
-            // change marker icon color of clicked marker
-            //marker.setIcon(highlightedIcon)
             infowindow.marker = marker
             infowindow.setContent(`<h3>${marker.title}</h3>`)
             infowindow.open(this.map, marker)
             // Make sure the marker property is cleared if the infowindow is closed.
             infowindow.addListener('closeclick', function () {
                 infowindow.marker = null
-            })
+            });
         }
     }
 
@@ -89,12 +89,12 @@ class Map extends Component {
         return (
             <div>
                 <div>
-                    <Search onLocationsLoaded={this.addMarkers} />
+                    <Search onLocationsLoaded={this.addMarkers} onLocationClick={this.openMarkerInfo} />
                 </div>
                 <div role="application" className="map" ref="map">
                     loading ...
                 </div>
-            </div>
+            </div >
 
         )
     }

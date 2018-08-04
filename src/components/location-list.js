@@ -11,7 +11,7 @@ class LocationList extends Component {
             <div className="list">
                 <ul>
                     {this.props.locations.map((loc, index) => (
-                        <li key={index} onClick={this.props.onLocationClick}>{loc.title}</li>
+                        <li key={loc.id}><button onClick={() => this.props.onLocationClick(loc)}>{loc.title}</button></li>
                     ))}
                 </ul>
             </div>
