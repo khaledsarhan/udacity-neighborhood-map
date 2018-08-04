@@ -60,7 +60,7 @@ class Map extends Component {
             markers.push(marker);
         })
         this.state.markers = markers;
-        console.log(markers[0]);
+        //console.log(markers[0]);
         // this.state.map.fitBounds(bounds)
         //console.log(bounds);
     }
@@ -87,8 +87,8 @@ class Map extends Component {
 
     render() {
         return (
-            <div>
-                <div>
+            <div className="container">
+                <div id="sidebar" className={this.props.sidebarClass}>
                     <Search onLocationsLoaded={this.addMarkers} onLocationClick={this.openMarkerInfo} />
                 </div>
                 <div role="application" className="map" ref="map">

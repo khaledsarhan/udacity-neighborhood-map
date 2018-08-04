@@ -39,12 +39,10 @@ class Search extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Search by location name"
-                        onChange={e => this.searchLocation(e.target.value)} />
-                </div>
+                <input className="input-search"
+                    type="text"
+                    placeholder="Search by attraction name"
+                    onChange={e => this.searchLocation(e.target.value)} />
                 {this.props.onLocationsLoaded(this.state.searchResult)}
                 <LocationList locations={this.state.searchResult} onLocationClick={this.props.onLocationClick} />
             </div>
