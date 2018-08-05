@@ -6,8 +6,8 @@ import Map from './components/map'
 class App extends Component {
 
   state = {
-    sidebarClass: '',
-    bodySideClass: 'App'
+    sidebarClass: 'open-side',
+    bodySideClass: 'App body-slide'
   }
 
   toggleClass = () => {

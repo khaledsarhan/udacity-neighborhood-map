@@ -14,7 +14,7 @@ class LocationList extends Component {
                     {this.props.locations.map((loc, index) => (
                         <li key={loc.id} onClick={() => this.props.onLocationClick(loc)}>
                             <h3>{loc.title}</h3>
-                            <p>Some details</p>
+                            <p>{loc.details}</p>
                         </li>
                     ))}
                 </ul>

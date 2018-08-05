@@ -1,18 +1,11 @@
 import React, { Component } from 'react'
 import LocationList from './location-list';
-import ReactDOM from 'react-dom'
+import locations from '../data/locations';
 
 class Search extends Component {
 
     state = {
-        locations: [
-            { id: 1, title: "St. Stephen's Cathedral", location: { lat: 48.208414, lng: 16.373471 } },
-            { id: 2, title: "Viennese Giant Ferris Wheel", location: { lat: 48.216626, lng: 16.395889 } },
-            { id: 3, title: "Belvedere Palace", location: { lat: 48.191566, lng: 16.380958 } },
-            { id: 4, title: "Schönbrunn Palace", location: { lat: 48.185819, lng: 16.312763 } },
-            { id: 5, title: "Schönbrunn Zoo", location: { lat: 48.182094, lng: 16.302785 } },
-            { id: 6, title: "Volksgarten", location: { lat: 48.208120, lng: 16.361455 } }
-        ],
+        locations: locations,
         searchResult: []
     }
 

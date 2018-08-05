@@ -50,7 +50,8 @@ class Map extends Component {
                 position: location.location,
                 map: this.state.map,
                 title: location.title,
-                id: location.id
+                id: location.id,
+                details: location.details
             })
 
             marker.addListener('click', () => {
@@ -75,14 +76,40 @@ class Map extends Component {
 
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker !== marker) {
+
+            //marker.setIcon(highlightedIcon)
+            this.toggleBounce(marker);
             infowindow.marker = marker
-            infowindow.setContent(`<h3>${marker.title}</h3>`)
+            infowindow.setContent(`<div class="infowindow"><h3>${marker.title}</h3><p>${marker.details}</p></div>`)
             infowindow.open(this.map, marker)
             // Make sure the marker property is cleared if the infowindow is closed.
             infowindow.addListener('closeclick', function () {
-                infowindow.marker = null
+                if (this.marker) {
+                    this.marker.setAnimation(null);
+                    this.marker = null;
+                }
             });
         }
+    }
+
+    toggleBounce = (marker) => {
+        const { google } = this.props;
+        this.state.markers.map((m) => {
+            m.setAnimation(null);
+        });
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+
+    makeMarkerIcon = (markerColor) => {
+        const { google } = this.props
+        let markerImage = new google.maps.MarkerImage(
+            'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor +
+            '|40|_|%E2%80%A2',
+            new google.maps.Size(25, 37),
+            new google.maps.Point(0, 0),
+            new google.maps.Point(10, 34),
+            new google.maps.Size(25, 37));
+        return markerImage;
     }
 
     render() {
