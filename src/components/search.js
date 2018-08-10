@@ -34,6 +34,10 @@ class Search extends Component {
         }
     }
 
+    /*
+        - Based on the query value the locations will be passed to the location-list component.
+        - Locations should be either all locations or filtered location.
+     */
     render() {
         return (
             <div>

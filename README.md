@@ -30,8 +30,9 @@ There are main files which can help to start understand the scenario of the code
                   ├── search.js # This component is responsible for search and view the result for the                   locations.
                                 # Based on the query search input the location will be filtered and        passed to the location-list component.
     ├── data
-            ├── locations.js # This file includes all the information about the locations which we can                      use to display it in the map and the list view.
+            ├── placesAPI.js # This file includes functions to load the information about the locations                     which we can use to display it in the map and the list view (We are using                    an external api as a source for our data).
     ├── App.css # Styles for your app. Feel free to customize this as you desire.
-    ├── App.js # This is the root of your app.
+    ├── App.js # This is the root of the app.
+               # Location list has beed loaded here and passed to child components.
     ├── index.css # Global styles.
     └── index.js # It is used for DOM rendering only.
