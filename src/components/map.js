@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Search from './search';
 
+
+ /*
+      - This is the main component which will include the map with markers, search input and the locations list.
+      - All actions associated with the map has been done here (initMap, addMarkers, PopulateInfoWindow).
+ */
+
 class Map extends Component {
 
     state = {
@@ -14,6 +20,9 @@ class Map extends Component {
         this.initMap()
     }
 
+    /*
+     - Create the map with its configurations
+    */
     initMap() {
         if (this.props && this.props.google) {
             const { google } = this.props
@@ -33,6 +42,10 @@ class Map extends Component {
         }
     }
 
+    /*
+        - Add markers for the assigned locations to the map.
+        - This has been called when the location list has been loaded.
+   */
     addMarkers = (locations) => {
         const { google } = this.props
         let { infowindow } = this.state
@@ -45,6 +58,7 @@ class Map extends Component {
             })
         }
 
+        // Loop through all location to add its own marker
         locations.forEach((location) => {
             const marker = new google.maps.Marker({
                 position: location.location,
@@ -61,11 +75,12 @@ class Map extends Component {
             markers.push(marker);
         })
         this.state.markers = markers;
-        //console.log(markers[0]);
-        // this.state.map.fitBounds(bounds)
-        //console.log(bounds);
     }
 
+    /*
+        - Open a window info for specific location.
+        - This has been called when the location has been clicked in the list view.
+   */
     openMarkerInfo = (location) => {
         let { infowindow } = this.state
         const marker = this.state.markers.filter((m) => m.id === location.id)[0];
@@ -76,9 +91,7 @@ class Map extends Component {
 
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker !== marker) {
-
-            //marker.setIcon(highlightedIcon)
-            this.toggleBounce(marker);
+            this.toggleBounce(marker); // Add animation to the selected marker
             infowindow.marker = marker
             infowindow.setContent(`<div class="infowindow"><h3>${marker.title}</h3><p>${marker.details}</p></div>`)
             infowindow.open(this.map, marker)
@@ -92,24 +105,15 @@ class Map extends Component {
         }
     }
 
+    /*
+      - Remove the animation for all markers and add it to the selected one.
+    */
     toggleBounce = (marker) => {
         const { google } = this.props;
         this.state.markers.map((m) => {
             m.setAnimation(null);
         });
         marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-
-    makeMarkerIcon = (markerColor) => {
-        const { google } = this.props
-        let markerImage = new google.maps.MarkerImage(
-            'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor +
-            '|40|_|%E2%80%A2',
-            new google.maps.Size(25, 37),
-            new google.maps.Point(0, 0),
-            new google.maps.Point(10, 34),
-            new google.maps.Size(25, 37));
-        return markerImage;
     }
 
     render() {

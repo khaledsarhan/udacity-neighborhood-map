@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import LocationList from './location-list';
 import locations from '../data/locations';
 
+ /*
+      - This component is responsible for search and view the result for the locations.
+ */
+
 class Search extends Component {
 
     state = {
@@ -13,6 +17,10 @@ class Search extends Component {
         this.setState({ searchResult: this.state.locations });
     }
 
+    /*
+      - Filter the locations based on a query and update the state 
+        to affect the data in the location-list component.
+    */
     searchLocation = (query) => {
         query = query.trim();
         if (query.length <= 0) {

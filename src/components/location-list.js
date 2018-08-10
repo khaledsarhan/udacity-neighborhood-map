@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import Img from 'react-image'
-
+ /*
+      - This component is responsible for viewing the list of locations which is passed from the search component.
+ */
 class LocationList extends Component {
-
-    componentDidMount() {
-        // window.addEventListener('load', this.props.onLocationsLoaded(this.props.locations));
-    }
 
     render() {
         return (
