@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 import LocationList from './location-list';
-import locations from '../data/locations';
 
- /*
-      - This component is responsible for search and view the result for the locations.
- */
+/*
+     - This component is responsible for search and view the result for the locations.
+*/
 
 class Search extends Component {
 
     state = {
-        locations: locations,
-        searchResult: []
-    }
-
-    componentDidMount() {
-        this.setState({ searchResult: this.state.locations });
+        searchResult: [],
+        query: ''
     }
 
     /*
@@ -24,17 +19,19 @@ class Search extends Component {
     searchLocation = (query) => {
         query = query.trim();
         if (query.length <= 0) {
-            this.setState({ searchResult: this.state.locations })
+            this.setState({ searchResult: this.props.locations, query: query })
             return;
         }
 
-        let finalLocations = []
-        this.state.locations.forEach((loc, i) => {
-            if (loc.title.toLowerCase().includes(query.toLowerCase())) {
-                finalLocations.push(loc);
-            }
-        });
-        this.setState({ searchResult: finalLocations });
+        if (this.props.locations) {
+            let finalLocations = []
+            this.props.locations.forEach((loc) => {
+                if (loc.venue.name.toLowerCase().includes(query.toLowerCase())) {
+                    finalLocations.push(loc);
+                }
+            });
+            this.setState({ searchResult: finalLocations, query: query });
+        }
     }
 
     render() {
@@ -44,8 +41,8 @@ class Search extends Component {
                     type="text"
                     placeholder="Search by attraction name"
                     onChange={e => this.searchLocation(e.target.value)} />
-                {this.props.onLocationsLoaded(this.state.searchResult)}
-                <LocationList locations={this.state.searchResult} onLocationClick={this.props.onLocationClick} />
+                {this.state.query.length > 0 ? this.props.onLocationLoaded(this.state.searchResult) : this.props.onLocationLoaded(this.props.locations)}
+                <LocationList locations={this.state.query.length > 0 ? this.state.searchResult : this.props.locations} onLocationClick={this.props.onLocationClick} />
             </div>
         )
     }

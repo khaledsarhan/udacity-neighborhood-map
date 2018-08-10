@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Search from './search';
 
-
- /*
-      - This is the main component which will include the map with markers, search input and the locations list.
-      - All actions associated with the map has been done here (initMap, addMarkers, PopulateInfoWindow).
- */
+/*
+     - This is the main component which will include the map with markers, search input and the locations list.
+     - All actions associated with the map has been done here (initMap, addMarkers, PopulateInfoWindow).
+*/
 
 class Map extends Component {
 
@@ -17,7 +16,7 @@ class Map extends Component {
     }
 
     componentDidMount() {
-        this.initMap()
+        this.initMap();
     }
 
     /*
@@ -32,7 +31,7 @@ class Map extends Component {
             const node = ReactDOM.findDOMNode(mapRef)
 
             const mapConfig = Object.assign({}, {
-                zoom: 12,
+                zoom: 15,
                 center: { lat: 48.206875, lng: 16.370751 },
                 mapTypeControl: false
             })
@@ -58,23 +57,26 @@ class Map extends Component {
             })
         }
 
-        // Loop through all location to add its own marker
-        locations.forEach((location) => {
-            const marker = new google.maps.Marker({
-                position: location.location,
-                map: this.state.map,
-                title: location.title,
-                id: location.id,
-                details: location.details
-            })
+        if (locations) {
 
-            marker.addListener('click', () => {
-                this.populateInfoWindow(marker, infowindow)
+            // Loop through all location to add its own marker
+            locations.forEach((location) => {
+                const marker = new google.maps.Marker({
+                    position: { lat: location.venue.location.lat, lng: location.venue.location.lng },
+                    map: this.state.map,
+                    title: location.venue.name,
+                    id: location.venue.id,
+                    details: `${location.venue.location.formattedAddress[0]}, ${location.venue.location.formattedAddress[1]}, ${location.venue.location.formattedAddress[2]}`
+                })
+
+                marker.addListener('click', () => {
+                    this.populateInfoWindow(marker, infowindow)
+                })
+                bounds.extend(marker.position)
+                markers.push(marker);
             })
-            bounds.extend(marker.position)
-            markers.push(marker);
-        })
-        this.state.markers = markers;
+            this.state.markers = markers;
+        }
     }
 
     /*
@@ -83,7 +85,7 @@ class Map extends Component {
    */
     openMarkerInfo = (location) => {
         let { infowindow } = this.state
-        const marker = this.state.markers.filter((m) => m.id === location.id)[0];
+        const marker = this.state.markers.filter((m) => m.id === location.venue.id)[0];
         this.populateInfoWindow(marker, infowindow);
     }
 
@@ -120,7 +122,7 @@ class Map extends Component {
         return (
             <div className="container">
                 <div id="sidebar" className={this.props.sidebarClass}>
-                    <Search onLocationsLoaded={this.addMarkers} onLocationClick={this.openMarkerInfo} />
+                    <Search onLocationLoaded={this.addMarkers} onLocationClick={this.openMarkerInfo} locations={this.props.locations} />
                 </div>
                 <div role="application" className="map" ref="map">
                     loading ...
