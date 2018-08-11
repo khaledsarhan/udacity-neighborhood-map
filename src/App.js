@@ -28,6 +28,7 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  // Use this function to toggle classes for opening and closing the attraction items by the hamburger menu item
   toggleClass = () => {
     if (this.state.sidebarClass == '') {
       this.setState({ sidebarClass: 'open-side', bodySideClass: 'App body-slide' });
@@ -36,6 +37,7 @@ class App extends Component {
     }
   }
 
+  // Remove unused elements from the accessibility tree
   removeTabIndex() {
     let mapContainer = document.getElementsByClassName("gm-style")[0];
     if (mapContainer && mapContainer.children && mapContainer.children.length > 0) {
