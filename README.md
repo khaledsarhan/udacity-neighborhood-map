@@ -1,4 +1,4 @@
-# MyReads Project
+# Neighborhood Map Project
 
 This is neighborhood map project, one of the **Udacity** front end web development nanodegree projects.
 
