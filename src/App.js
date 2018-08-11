@@ -25,7 +25,9 @@ class App extends Component {
       .then(data => {
         this.setState({ locations: data.response.groups[0].items });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        alert(err);
+      });
   }
 
   // Use this function to toggle classes for opening and closing the attraction items by the hamburger menu item
