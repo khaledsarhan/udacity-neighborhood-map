@@ -33,7 +33,8 @@ class Map extends Component {
             const mapConfig = Object.assign({}, {
                 zoom: 15,
                 center: { lat: 48.206875, lng: 16.370751 },
-                mapTypeControl: false
+                mapTypeControl: false,
+                tabIndex: -1
             })
 
             this.map = new maps.Map(node, mapConfig)

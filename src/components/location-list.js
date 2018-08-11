@@ -5,15 +5,14 @@ import React, { Component } from 'react'
 class LocationList extends Component {
     render() {
         return (
-            <div className="list">
-                <ul>
+                <ul className="list" tabIndex="0" aria-label="Attraction list">
                     {this.props.locations && this.props.locations.map((loc) => (
-                        <li key={loc.venue.id} onClick={() => this.props.onLocationClick(loc)}>
+                        <li key={loc.venue.id} onClick={() => this.props.onLocationClick(loc)} tabIndex="0">
                             <h3>{loc.venue.name}</h3>
+                            <p className="offscreen">Address: {loc.venue.location.formattedAddress[0]}, {loc.venue.location.formattedAddress[1]}, {loc.venue.location.formattedAddress[2]}</p>
                         </li>
                     ))}
                 </ul>
-            </div >
         )
     }
 }

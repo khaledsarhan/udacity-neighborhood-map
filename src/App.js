@@ -13,7 +13,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getAllLocations()
+    this.getAllLocations();
+  }
+
+  componentDidUpdate() {
+    this.removeTabIndex();
   }
 
   getAllLocations() {
@@ -32,6 +36,15 @@ class App extends Component {
     }
   }
 
+  removeTabIndex() {
+    let mapContainer = document.getElementsByClassName("gm-style")[0];
+    if (mapContainer && mapContainer.children && mapContainer.children.length > 0) {
+      for (let i = 0; i < mapContainer.children.length; i++) {
+        mapContainer.children[i].tabIndex = -1;
+      }
+    }
+  }
+
   render() {
     return (
       <div className={this.state.bodySideClass}>
@@ -41,7 +54,7 @@ class App extends Component {
           <div className="bar2"></div>
           <div className="bar3"></div>
         </div>
-        <div className="header">Vienna Attractions map</div>
+        <div className="header" tabIndex="0">Vienna Attractions map</div>
 
         <Map google={this.props.google} sidebarClass={this.state.sidebarClass} locations={this.state.locations} />
       </div>
